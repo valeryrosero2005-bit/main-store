@@ -45,7 +45,7 @@
                  <td>
                     <img src = "<?= $row['url_photo'] ?>" width="40" alt="User photo profile">
                  </td>
-                 <td><?= $row['fullname']?></td>
+                <td><?= $row['fullname']?></td>
                 <td><?= $row['email']?></td>
                 <td><?= $row['mobile_phone']?></td>
                 <td><?= $row['status']?></td>
@@ -57,7 +57,7 @@
                     <a href="#">
                          <img src="icons/search.png" alt="Search user" width="20">
                     </a>
-                    <a href="#">
+                    <a href="delete_user.php?userID=<?= $row['id']?>">
                          <img src="icons/delete.png" alt="Delete user" width="20">
                     </a>
                 </td>
