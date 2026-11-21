@@ -8,7 +8,6 @@ if (!isset($_SESSION['user_id'])){
 }else {
     header('refresh:0;url=home.php');
 }
-
     $email= $_POST['email'];
     $passwd= MD5($_POST['passw']);
 

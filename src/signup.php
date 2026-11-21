@@ -3,6 +3,10 @@
     
    //http:127.0.0.1:80/main-store/src/signup.html
 //get database connection 
+    session_start();
+    if(!isset($_SESSION['user_id'])){
+        header('refresh:0;url=signin.html');
+        exit();}
 include('../settings/database.php');
 
     $first_name= $_POST['fname'];
