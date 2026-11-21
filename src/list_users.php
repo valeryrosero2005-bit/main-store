@@ -53,16 +53,20 @@ include('../settings/database.php');
             <?php while ($row = pg_fetch_assoc($res)) { ?>
         <tr>
                 <!-- Here print data from database-->
-                <td>
-                    <img src = "<?= $row['url_photo'] ?>" width="40" alt="User photo profile">
-                </td>
+            <td>
+                <?php if ($row['url_photo'] != "") { ?>
+                    <img src="<?php echo $row['url_photo']; ?>" width="60" height="60">
+                <?php } else { ?>
+                    Sin foto
+                <?php } ?>
+            </td>
                 <td><?= $row['fullname']?></td>
                 <td><?= $row['email']?></td>
                 <td><?= $row['mobile_phone']?></td>
                 <td><?= $row['status']?></td>
                
                 <td align="center">
-                    <a href="#">
+                    <a href="edit_user.php?userid=<?= $row['id']?>">
                         <img src="icons/edit.png" alt="Edit user" width="20">
                     </a>
                     <a href="#">
@@ -88,3 +92,8 @@ include('../settings/database.php');
         <a href= "home.php">Go to home</a
     <body>
 </html>
+
+
+
+
+
