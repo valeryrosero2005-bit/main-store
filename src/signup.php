@@ -1,20 +1,16 @@
 <?php
 
-    
-   //http:127.0.0.1:80/main-store/src/signup.html
-//get database connection 
-    session_start();
-    if(!isset($_SESSION['user_id'])){
-        header('refresh:0;url=signin.html');
-        exit();}
-include('../settings/database.php');
+    //http:127.0.0.1:80/main-store/src/signup.html
+    //get database connection 
+    include('../settings/database.php');
 
     $first_name= $_POST['fname'];
     $last_name= $_POST['lname'];
     $ident_number= $_POST['idnumber'];
     $mobile_phone= $_POST['mphone'];
     $email= $_POST['email'];
-    $passwd= MD5($_POST['passw']);
+    //$passwd= MD5($_POST['passw']);
+    $passwd = password_hash($_POST['passw'], PASSWORD_DEFAULT);
     $PHOTO_URL ='photos/photo_default.png';
 
 $sql_check_email ="SELECT * FROM users WHERE email = '$email'";

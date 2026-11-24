@@ -2,16 +2,25 @@
 //get database connection 
 include('../settings/database.php');
 
-session_start();
+/*session_start();
 if (!isset($_SESSION['user_id'])){
     header('refresh:0;url=signin.html');
 }else {
     header('refresh:0;url=home.php');
-}
+}*/
     $email= $_POST['email'];
-    $passwd= MD5($_POST['passw']);
+    //$passwd= MD5($_POST['passw']);
 
-$sql_check_email ="
+    $sql_get_password = "SELECT password FROM users WHERE email = '$email'";
+    $res =pg_query ($local_conn, $sql_get_password);
+    $row= pg_fetch_assoc ($res);
+    $passwd_db =$row ['password'];
+
+    $passwd= password_verify($_POST['passw'], $passwd_db);
+
+
+    echo "hola". $passwd;
+    $sql_check_email ="
     SELECT 
         id,
         firstname,
@@ -32,8 +41,8 @@ if ($total>0){
     $_SESSION['user_id'] = $row ['id'];
     $_SESSION['user_firstname'] = $row['firstname'];
     $_SESSION['user_lastname'] = $row['lastname'];
-    header ('refresh:0;url=home.php');
+    /*header ('refresh:0;url=home.php');
     }else {
     echo "<script>alert('Invalid email or password. Try again!!!')</script>";
-        header ('refresh:0;url=signin.html');
+        header ('refresh:0;url=signin.html');*/
 }

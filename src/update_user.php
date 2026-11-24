@@ -51,4 +51,14 @@ if ($_FILES['photo']['name'] != "") {
 // ---------- PARTE C: volver a la lista ----------
 header("Location: list_users.php");
 exit;
+
+// ---------- PARTE D: opcion eliminar foto ----------
+/*if (!empty($_POST['eliminar_foto'])) {
+  // Borra el archivo físico si existe
+  if (!empty($user['foto']) && file_exists($user['foto'])) {
+    unlink($user['foto']);
+  }
+  // Borra la foto en la base de datos
+  pg_query_params($local_conn, "UPDATE users SET foto = NULL WHERE id = $1", [$id]);
+}/*
 ?>
