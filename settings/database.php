@@ -27,7 +27,7 @@ http://localhost/main-store/settings/database.php
     $supa_user = "postgres.ypztrgvkoppbmylcoxuq";
     $supa_password = "main-store@@";
  
-    $supa_conn = pg_connect("
+    $supa_conn = @pg_connect("
         host=$supa_host
         port=$supa_port
         dbname=$supa_dbname
@@ -36,7 +36,7 @@ http://localhost/main-store/settings/database.php
     );
 
     if (!$local_conn) {
-        die("Error local connection");
+        $supa_conn = null;
     }else {
     //echo "Success database local connection !!!";
 }

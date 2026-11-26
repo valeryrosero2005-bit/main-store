@@ -41,6 +41,12 @@ $user = pg_fetch_assoc($result);
 
         <button type="submit">Guardar</button>
         <a href="list_users.php">Cancelar</a>
+        
+        <a href="delete_photo.php?id=<?php echo $user['id']; ?>" 
+            onclick="return confirm('¿Quieres eliminar esta foto?')" 
+            style="color:red;">Eliminar foto</a>
+
+
     </form>
 </body>
 </html>

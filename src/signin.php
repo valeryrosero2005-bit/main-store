@@ -8,8 +8,8 @@ if (!isset($_SESSION['user_id'])){
 }else {
     header('refresh:0;url=home.php');
 }*/
-    $email= $_POST['email'];
-    //$passwd= MD5($_POST['passw']);
+    /*$email= $_POST['email'];
+    $passwd= MD5($_POST['passw']);
 
     $sql_get_password = "SELECT password FROM users WHERE email = '$email'";
     $res =pg_query ($local_conn, $sql_get_password);
@@ -41,8 +41,44 @@ if ($total>0){
     $_SESSION['user_id'] = $row ['id'];
     $_SESSION['user_firstname'] = $row['firstname'];
     $_SESSION['user_lastname'] = $row['lastname'];
-    /*header ('refresh:0;url=home.php');
+    header ('refresh:0;url=home.php');
     }else {
     echo "<script>alert('Invalid email or password. Try again!!!')</script>";
-        header ('refresh:0;url=signin.html');*/
+        header ('refresh:0;url=signin.html');
+}*/
+
+
+session_start();
+include('../settings/database.php');
+
+$email = $_POST['email'] ?? '';
+$pass = $_POST['passw'] ?? '';
+
+if($email == '' || $pass == ''){
+    header('Location: signin.html');
+    exit;
 }
+
+$sql = "SELECT id, firstname, lastname, email, password, rol FROM users WHERE email = '$email'";
+$res = pg_query($local_conn, $sql);
+$total = pg_num_rows($res);
+
+if($total > 0){
+    $row = pg_fetch_assoc($res);
+    if(password_verify($pass, $row['password'])){
+        $_SESSION['user_id'] = $row['id'];
+        $_SESSION['user_firstname'] = $row['firstname'];
+        $_SESSION['user_lastname'] = $row['lastname'];
+        $_SESSION['rol'] = $row['rol'];
+        header('Location: home.php');
+        exit;
+    }
+}
+
+echo "<script>alert('Invalid email or password. Try again!');</script>";
+header('refresh:0;url=signin.html');
+
+
+
+
+?>

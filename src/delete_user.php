@@ -19,3 +19,5 @@ header('refresh:0;url=list_users.php');
     echo "<script>alert('User has not been deleted successfully !!!')</script>";
 header('refresh:0;url=list_users.php');
 }
+
+

@@ -57,7 +57,7 @@ include('../settings/database.php');
                 <?php if ($row['url_photo'] != "") { ?>
                     <img src="<?php echo $row['url_photo']; ?>" width="60" height="60">
                 <?php } else { ?>
-                    Sin foto
+                    <img src="photos/photo_default.png" width="60">
                 <?php } ?>
             </td>
                 <td><?= $row['fullname']?></td>
